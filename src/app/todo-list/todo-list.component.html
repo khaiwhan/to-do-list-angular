@@ -1,0 +1,27 @@
+<div class="todo">
+    <div class="today-header">
+        <h1><fa-icon [icon]="sun"></fa-icon> To Day</h1>
+        <p>{{date}}</p>
+    </div>
+    <div class="todo-list-add" [formGroup]="form">
+        <textbox [placeholder]="'Add Task'" (keyup.enter)="addTask()" formControlName="text"></textbox>
+    </div>
+
+    <div class="show-todo-list">
+        @for(task of tasks; track task.id;let i = $index;){
+        <div class="todo-card" [class.todo-complete-card]="task.complete" (click)="complete(task.id);">
+            <div class="todo-text">
+                <input type="checkbox" (change)="complete(task.id)" [checked]="task.complete">
+                @if(task.complete){
+                <del>{{task.text}}</del>
+                }@else{
+                {{task.text}}
+                }
+            </div>
+            <div class="remove-btn" (click)="removeTasks(i)">
+                <fa-icon [icon]="trash"></fa-icon>
+            </div>
+        </div>
+        }
+    </div>
+</div>
